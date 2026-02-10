@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NC News API</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>NC News API</h1>
+      <p>
+        A RESTful API for accessing news articles, topics, users, and comments.
+      </p>
+    </header>
+
+    <main>
+      <h2>Available Endpoints:</h2>
+
+      <ul>
+        <li class="endpoint-card">
+          <h3>GET /api/topics</h3>
+          <p>Retrieve a list of all topics.</p>
+        </li>
+        <li class="endpoint-card">
+          <h3>GET /api/articles</h3>
+          <p>Retrieve a list of all articles.</p>
+        </li>
+        <li class="endpoint-card">
+          <h3>GET /api/articles/:article_id</h3>
+          <p>Retrieve a single article by its ID.</p>
+
+          <h4>Example response:</h4>
+          <pre><code>{
+  "article": {
+    "article_id": 1,
+    "title": "Running a Node App",
+    "topic": "coding",
+    "author": "jessjelly",
+    "votes": 0
+  }
+}</code></pre>
+        </li>
+      </ul>
+    </main>
+  </body>
+</html>

@@ -1,9 +1,13 @@
+const path = require("path"); //for task 8 Week7 Day 2
+
 const express = require("express");
 
 const { getTopics } = require("./controllers/topics.controller");
 const { getArticles } = require("./controllers/articles.controller");
 const { getArticleById } = require("./controllers/articles.controller");
 const app = express();
+
+app.use(express.static(path.join(__dirname, "public"))); // for task 8 Week7 Day 2
 
 app.get("/api/topics", getTopics);
 app.get("/api/articles", getArticles);
