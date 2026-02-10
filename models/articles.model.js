@@ -20,12 +20,19 @@ exports.selectArticles = () => {
       ORDER BY articles.created_at DESC;
       `,
     )
-    .then((result) => {
-      return result.rows;
+    .then(({ rows }) => {
+      return rows;
     });
 };
 
 exports.selectArticleById = (article_id) => {
+  if (isNaN(article_id)) {
+    return Promise.reject({
+      status: 400,
+      msg: "Bad request",
+    });
+  }
+
   return db
     .query(
       `
@@ -46,7 +53,13 @@ exports.selectArticleById = (article_id) => {
       `,
       [article_id],
     )
-    .then((result) => {
-      return result.rows[0];
+    .then(({ rows }) => {
+      if (!rows.length) {
+        return Promise.reject({
+          status: 404,
+          msg: "Article not found",
+        });
+      }
+      return rows[0];
     });
 };
