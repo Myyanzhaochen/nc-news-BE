@@ -1,3 +1,5 @@
+const cors = require("cors");
+
 const path = require("path"); //for task 8 Week7 Day 2
 
 const express = require("express");
@@ -7,6 +9,7 @@ const { getArticles } = require("./controllers/articles.controller");
 const { getArticleById } = require("./controllers/articles.controller");
 const app = express();
 
+app.use(cors());
 app.use(express.static(path.join(__dirname, "public"))); // for task 8 Week7 Day 2
 
 app.get("/api/topics", getTopics);
@@ -34,7 +37,7 @@ app.use((err, req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  console.error(err); // 👈 shows real error in logs
+  console.error(err);
   res.status(500).send({ msg: err.message });
 });
 
