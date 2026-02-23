@@ -16,6 +16,15 @@ app.get("/api/articles/:article_id", getArticleById);
 const { getCommentsByArticleId } = require("./controllers/comments.controller");
 app.get("/api/articles/:article_id/comments", getCommentsByArticleId);
 
+app.get("/api", (req, res) => {
+  res.status(200).send({
+    endpoints: {
+      "GET /api/topics": "Get all topics",
+      "GET /api/articles": "Get all articles",
+    },
+  });
+});
+
 app.use((err, req, res, next) => {
   if (err.status && err.msg) {
     res.status(err.status).send({ msg: err.msg });
