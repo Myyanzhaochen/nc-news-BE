@@ -1,16 +1,24 @@
 const { Pool } = require("pg");
 
-const ENV = process.env.NODE_ENV || 'development'
+const ENV = process.env.NODE_ENV || "development";
 
-require('dotenv').config({path: `${__dirname}/../.env.${ENV}`})
+console.log("ENV:", ENV);
+console.log("Looking for file:", `.env.${ENV}`);
 
-const db = new Pool();
+require("dotenv").config({
+  path: process.cwd() + `/.env.${ENV}`,
+});
 
-if (!process.env.PGDATABASE) {
-    throw new Error("No PGDATABASE configured")
-} else { 
-    console.log(`Connected to ${process.env.PGDATABASE}`)
-}
+const config =
+  ENV === "production"
+    ? {
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      }
+    : {};
 
+const db = new Pool(config);
 
 module.exports = db;
