@@ -20,7 +20,6 @@ const { getCommentsByArticleId } = require("./controllers/comments.controller");
 app.get("/api/articles/:article_id/comments", getCommentsByArticleId);
 
 const { patchArticleVotes } = require("./controllers/articles.controller");
-
 app.patch("/api/articles/:article_id", express.json(), patchArticleVotes);
 
 app.get("/api", (req, res) => {
