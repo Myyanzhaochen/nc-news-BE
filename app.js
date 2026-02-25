@@ -1,6 +1,6 @@
 const cors = require("cors");
 
-const path = require("path"); //for task 8 Week7 Day 2
+const path = require("path");
 
 const express = require("express");
 
@@ -10,7 +10,7 @@ const { getArticleById } = require("./controllers/articles.controller");
 const app = express();
 
 app.use(cors());
-app.use(express.static(path.join(__dirname, "public"))); // for task 8 Week7 Day 2
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/api/topics", getTopics);
 app.get("/api/articles", getArticles);
@@ -18,6 +18,10 @@ app.get("/api/articles/:article_id", getArticleById);
 
 const { getCommentsByArticleId } = require("./controllers/comments.controller");
 app.get("/api/articles/:article_id/comments", getCommentsByArticleId);
+
+const { patchArticleVotes } = require("./controllers/articles.controller");
+
+app.patch("/api/articles/:article_id", express.json(), patchArticleVotes);
 
 app.get("/api", (req, res) => {
   res.status(200).send({
