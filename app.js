@@ -9,6 +9,7 @@ const { getArticles } = require("./controllers/articles.controller");
 const { getArticleById } = require("./controllers/articles.controller");
 const { patchArticleVotes } = require("./controllers/articles.controller");
 const { getCommentsByArticleId } = require("./controllers/comments.controller");
+const { postComment } = require("./controllers/comments.controller");
 
 const app = express();
 app.use(cors());
@@ -21,6 +22,8 @@ app.get("/api/articles/:article_id", getArticleById);
 app.get("/api/articles/:article_id/comments", getCommentsByArticleId);
 
 app.patch("/api/articles/:article_id", express.json(), patchArticleVotes);
+
+app.post("/api/articles/:article_id/comments", express.json(), postComment);
 
 app.get("/api", (req, res) => {
   res.status(200).send({
